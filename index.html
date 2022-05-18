@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <input type="text" class="txtb" placeholder="Add tasks here or create a schedule">
+        <div class="notcamp">
+            <h3>Not Completed</h3>
+
+
+        </div>
+    </div>
+    <div class="container">
+        <div class="camp">
+            <h3>Completed </h3>
+
+        </div>
+    </div>
+
+</body>
+<script src="./jquery-3.6.0.min.js"></script>
+
+<script>
+    $(".txtb").on("keyup", function(e) {
+        if (e.keyCode == 13 && $(".txtb").val() != "") {
+            var task = $("<div class='task'></div>").text($(".txtb").val());
+            var del = $("<i class='fa fa-trash-o' aria-hidden='true'></i>").click(function() {
+                var p = $(this).parent();
+                p.fadeOut(function() {
+                    p.remove();
+                })
+            })
+
+            var check = $("<i class='fa fa-check' aria-hidden='true'></i>").click(function() {
+                var p = $(this).parent();
+                p.fadeOut(2000, function() {
+
+                    $('.camp').append(p)
+                    p.fadeIn(2000)
+
+                })
+                $(this).remove()
+            })
+            task.append(del, check)
+            $(".notcamp").append(task);
+            $(".txtb").val("");
+        }
+    })
+</script>
+
+</html>
